@@ -4,12 +4,21 @@ const axios = require("axios");
 const router = express.Router();
 
 router.get("/comics", async (req, res) => {
+  // console.log(req.query);
+  // { apiKey: 'CADgxRwOc45WnlzR', title: 'Hunter' }
+  const { title, limit, skip } = req.query;
+  // console.log(title);
+  // Hunter
+
   try {
     const response = await axios.get(
       "https://lereacteur-marvel-api.herokuapp.com/comics",
       {
         params: {
           apiKey: process.env.API_KEY,
+          title: title,
+          limit: limit,
+          skip: skip,
         },
       }
     );
